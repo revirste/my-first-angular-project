@@ -4,13 +4,18 @@
         <th>Last Name</th>
         <th>E-mail</th>
         <th>Sales Volume</th>
+        <th>Met Sales Quota?</th>
     </thead>
     <tbody>
         <tr *ngFor="let salesPerson of salesPeopleList">
             <td>{{ salesPerson.firstName }}</td>
             <td>{{ salesPerson.lastName }}</td>
             <td>{{ salesPerson.email }}</td>
-            <td>{{ salesPerson.salesVolume }}</td>
+            <td>{{ salesPerson.salesVolume | currency:'USD' }}</td>
+            <td>
+                <div *ngIf="salesPerson.salesVolume >= 250; else didNotMeetQuota">Yes</div>
+                <ng-template #didNotMeetQuota>No</ng-template>
+            </td>
         </tr>
     </tbody>
 </table>
